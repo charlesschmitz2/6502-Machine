@@ -1,18 +1,35 @@
 import {System} from "../System";
-import * as readline from 'readline';
-import * as _DebugMessage from 'readline';
 export class Hardware {
 
-    public system_ID : Number = 0;
-    public cpu_ID : Number = 0;
+    public ID : Number = 0;
+    public name : String = "HARDWARE";
     public debug : boolean = true;
-    public _log : string;
+    
     
 
     constructor() {
-            this.main();
+        
+
     }//constructor
+
+    public log (message : String) : void {
+        if(this.debug){
+            let dateTime = new Date().getTime();
+            message = "CREATED";
+            console.log("[HW - " + this.name + " ID : " + this.ID + " - " + dateTime + "] : " + message);
+        }//if
+    }//log
+
     
+    
+}
+
+/*   -------IGNORE THIS CODE, IT IS WRONG BUT KEPT SOME OF IT IN CASE IT COULD BE USEFUL LATER FOR CONSOLE INPUT------
+
+public debug : boolean = true;
+    public _log : string;
+    import * as readline from 'readline';
+    import * as _DebugMessage from 'readline';
     main() {
         this.debug = this.debugFunction(); 
            
@@ -48,7 +65,7 @@ export class Hardware {
     public debugFunction() : boolean {
         let _debug : boolean = this.debug;
 
-        /*
+    
         //Message for Debugging Mode-----------
         let rl = readline.createInterface({
             input: process.stdin,
@@ -70,39 +87,9 @@ export class Hardware {
             rl.close();
         });
 
-        For some reason the console outputs all of the questions all at once, im not sure how to get it to process only one
-        at a time. I attempted some while or if loops, different messages, bunch of stuff but the internet is not really making it to
-        clear on how to do what I want so i just commented out the code I couldnt get to work before the due date and debugging
-        is always set to true unless you change it within the code. Also based on how you 
-        gave the instructions i'm not quite sure where what belongs and some other things so I apologize for that. I'm not sure
-        if you want input in the console at all from the user or none at all and just adjusted in the code.Also not sure why all
-         my outputs are being printed out twice so sorry about that I will continue to keep learning about 
-         typescript/javascript/git just trying to work out the kinks a day at the time, gotta start somewhere I guess :)
-        */
+        
         return _debug;
         //--------------------------------------
         }//debug
 
-    
-
-    public log(message : string) {
-        let log = "[HW - System id: " + this.system_ID + " - " + Math.random() + " ] : " + message;
-        log += "\n[HW - Cpu id: " + this.cpu_ID + " - " + Math.random() + " ] : " + message;
-        return log;
-    } 
-
-
-    public debugON(): boolean {
-
-        return true;
-    }
-
-    public debugOFF(): boolean {
-
-        return false;
-
-    }
-
-    
-    
-}
+*/

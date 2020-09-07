@@ -3,9 +3,17 @@ import {Hardware} from "./Hardware";
 
 export class Cpu extends Hardware{
 
-    constructor() {
-       
-    super();
+    private system : System;
+
+    constructor(system : System) {  
+        super();
+
+        this.system = system;
+
+        this.debug = true;
         
+        this.ID=0;
+        this.name="CPU";
+    
     }
 }

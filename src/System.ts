@@ -26,9 +26,11 @@ export class System extends Hardware{
     super();
         //console.log("Hello TSIRAM!");
 
+        this.ID =0;
+        this.name = "SYSTEM";
 
-        this._CPU = new Cpu();
-        //this._Hardware = new Hardware();
+        this._CPU = new Cpu(this);
+        
         
         /*
         Start the system (Analogous to pressing the power button and having voltages flow through the components)
@@ -42,7 +44,9 @@ export class System extends Hardware{
         }//constructor 
 
     public startSystem(): boolean {
-
+        this._CPU.log("CREATED");
+        this.log("CREATED");
+        
         return true;
     }
 
