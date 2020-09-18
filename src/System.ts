@@ -1,6 +1,8 @@
 // import statements for hardware
 import {Cpu} from "./hardware/Cpu";
 import {Hardware} from "./hardware/Hardware";
+import { Memory } from "./hardware/Memory";
+import {Clock} from "./hardware/Clock";
 
 
 /*
@@ -17,8 +19,10 @@ const CLOCK_INTERVAL= 500;               // This is in ms (milliseconds) so 1000
 
 export class System extends Hardware{
 
-    private _CPU : Cpu = null;
-    private _Hardware : Hardware = null;
+    public _CPU : Cpu = null;
+    public _Hardware : Hardware = null;
+    public _Memory : Memory = null;
+    public _Clock : Clock = null;
     
     public running: boolean = false;
 
@@ -27,11 +31,13 @@ export class System extends Hardware{
         //console.log("Hello TSIRAM!");
 
         this.ID =0;
-        this.name = "SYSTEM";
-
+        this.name = "SYSTEM";     
+        
         this._CPU = new Cpu(this);
-        
-        
+        //Initializes the RAM memory and 
+        this._Memory = new Memory(this);
+
+    
         /*
         Start the system (Analogous to pressing the power button and having voltages flow through the components)
         When power is applied to the system clock, it begins sending pulses to all clock observing hardware
@@ -46,7 +52,11 @@ export class System extends Hardware{
     public startSystem(): boolean {
         this._CPU.log("CREATED");
         this.log("CREATED");
-        
+        this._Memory.log("CREATED");
+        this._Memory.displayMemory(0x14);
+       
+        this._Clock = new Clock(CLOCK_INTERVAL, this);
+
         return true;
     }
 
@@ -58,3 +68,4 @@ export class System extends Hardware{
 }
 
 let system: System = new System();
+

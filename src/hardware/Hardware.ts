@@ -1,4 +1,8 @@
 import {System} from "../System";
+import { Cpu } from "./Cpu";
+import { ClockListener } from "./imp/ClockListener";
+import { Memory } from "./Memory";
+
 export class Hardware {
 
     public ID : Number = 0;
@@ -19,7 +23,6 @@ export class Hardware {
             console.log("[HW - " + this.name + " ID : " + this.ID + " - " + dateTime + "] : " + message);
         }//if
     }//log
-
     
     
 }
