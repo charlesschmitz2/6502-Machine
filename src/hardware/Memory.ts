@@ -36,7 +36,7 @@ export class Memory extends Hardware implements ClockListener{
         let dateTime = new Date().getTime();
         console.log("[HW - " + this.name + " ID : " + this.ID + " - " + dateTime + "] : " + number + " Contains Value: " + number.toString(length).toUpperCase().padStart(2, "0") + " [hexValue Conversion]");
         
-        //doesnt need to pad each time, 
+        //doesnt need to pad each time, might want to adjust padding 
         //[HW - RAM id: 0 - 1597551725249]: Address : 10000 Contains Value: ERR [hexValue conversion]: number undefined
     }//hexValue
 

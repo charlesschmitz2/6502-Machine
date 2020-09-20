@@ -24,7 +24,6 @@ export class Clock extends Hardware {
         setInterval(() => that.clockPulse(), clockInterval);
         
         //create array of clocklisteners, iterate through, call pulse 
-        //how to create arrays of a certain type object, add to array and if cant 
 
         
     
