@@ -19,7 +19,7 @@ export class Hardware {
     public log (message : String) : void {
         if(this.debug){
             let dateTime = new Date().getTime();
-            message = "CREATED";
+            //message = "CREATED";
             console.log("[HW - " + this.name + " ID : " + this.ID + " - " + dateTime + "] : " + message);
         }//if
     }//log

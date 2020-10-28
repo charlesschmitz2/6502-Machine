@@ -3,6 +3,7 @@ import {Cpu} from "./hardware/Cpu";
 import {Hardware} from "./hardware/Hardware";
 import { Memory } from "./hardware/Memory";
 import {Clock} from "./hardware/Clock";
+import {MMU} from "./hardware/Memory";
 
 
 /*
@@ -18,11 +19,14 @@ const CLOCK_INTERVAL= 500;               // This is in ms (milliseconds) so 1000
 
 
 export class System extends Hardware{
+    public dateTime = new Date().getTime();
 
     public _CPU : Cpu = null;
     public _Hardware : Hardware = null;
     public _Memory : Memory = null;
     public _Clock : Clock = null;
+    public _MMU : MMU = null;
+       
     
     public running: boolean = false;
 
@@ -34,8 +38,12 @@ export class System extends Hardware{
         this.name = "SYSTEM";     
         
         this._CPU = new Cpu(this);
+        //Initialize the MMU that is within memory 
+        this._MMU = new MMU(this);
+        
         //Initializes the RAM memory and 
         this._Memory = new Memory(this);
+        
 
     
         /*
@@ -50,11 +58,20 @@ export class System extends Hardware{
         }//constructor 
 
     public startSystem(): boolean {
+        console.log("----CREATING HARDWARE COMPONENTS----")
         this._CPU.log("CREATED");
         this.log("CREATED");
-        this._Memory.log("CREATED");
+        
+        //Lab 3 - When memory is created it should show the total addressable space in the log: NOTE - This could also be done within the memory constructor 
+        //but I chose to put it here so that when outputted in the console the first thing that shows up are each HW component being created, then the 
+        //total addressable space is displayed, then the memory is displayed...
+        const memoryAddressSpace = this._Memory.MemoryAddressRegistrar.length.toString(10);
+        this._Memory.log("CREATED - Addressable Space : " + memoryAddressSpace);
+
+        console.log("----DISPLAYING MEMORY, BEGINNING CLOCK PULSE----")
         this._Memory.displayMemory(0x14);
        
+        //commented out so easier to read output for lab 3 without continuous cycle
         this._Clock = new Clock(CLOCK_INTERVAL, this);
 
         return true;
