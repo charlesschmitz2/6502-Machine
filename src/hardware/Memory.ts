@@ -32,13 +32,17 @@ export class Memory extends Hardware implements ClockListener{
         this.initializeMAR();
         this.initializeMDR();
 
-        
-        //this.reset();
-        
+        //Testing
+        //console.log(this.memory);
+        //console.log(this.MAR);
+        //console.log(this.MDR);
 
-          
+        //this.read();
+        //this.write();
+
+        //Testing
+        //this.reset();       
      
-
     }//constructor 
 
     public initializeMemory(): void {
@@ -52,7 +56,7 @@ export class Memory extends Hardware implements ClockListener{
 
     public hexValue (number : number, length : number): void {
         
-        console.log("[HW - " + this.name + " ID : " + this.ID + " - " + this.dateTime + "] : " + number + " Contains Value: " + number.toString(length).toUpperCase().padStart(2, "00") + " [hexValue Conversion]");
+        console.log("[HW - " + this.name + " ID : " + this.ID + " - " + this.dateTime + "] : " + number + " Contains Value: " + number.toString(length).toUpperCase().padStart(4, "00") + " [hexValue Conversion]");
         
         //doesnt need to pad each time, might want to adjust padding 
         //[HW - RAM id: 0 - 1597551725249]: Address : 10000 Contains Value: ERR [hexValue conversion]: number undefined
@@ -137,10 +141,42 @@ export class Memory extends Hardware implements ClockListener{
      //Write will write the contents of MDR to memory at the location indicated by the MAR
         public read(): void{
 
+            /*starts at the beginning of the MAR and loops through, taking each value at that index from the MDR and setting it equal to temp then 
+            taking that value and assigning to memory at MAR index then increment to next index/MAR address and repeat until get to end of MAR */
+            console.log("\n----READING MEMORY[MAR] INTO MDR----")
+            var index = 0;
+            while(index < this.MAR.length){
+                let temp = 0x00;
+                temp = this.memory[this.MAR[index]];
+                if(temp != 0x00){
+                    this.MDR[this.MAR[index]] = temp;
+                }
+
+                //Testing - Temp represents the data at that particlar address index, Could maybe add additional condition to while so that
+                //if the MAR index is 0 meaning there is nothing there then stop the loop. I did above but not 100% on it
+                //console.log(temp);
+                //console.log(index);
+                
+                index++;
+            }//while 
+
+            //Testing       
+            //console.log(this.MDR);
+            //console.log(this.MAR);
+            //console.log(this.memory);
         }//read
 
         public write(): void{
+            console.log("\n----WRITING MDR[MAR] INTO MEMORY----")
+            var index = 0;
+            while(index < this.MAR.length){
+                let temp = 0x00;
+                temp = this.MDR[this.MAR[index]];
+                if(temp != 0x00){
+                    this.memory[this.MAR[index]] = temp;
+                }
 
+                index++;
         }//write 
 
 }//Memory Class

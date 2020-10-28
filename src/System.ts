@@ -61,14 +61,14 @@ export class System extends Hardware{
         console.log("----CREATING HARDWARE COMPONENTS----")
         this._CPU.log("CREATED");
         this.log("CREATED");
-        
+
         //Lab 3 - When memory is created it should show the total addressable space in the log: NOTE - This could also be done within the memory constructor 
         //but I chose to put it here so that when outputted in the console the first thing that shows up are each HW component being created, then the 
         //total addressable space is displayed, then the memory is displayed...
-        const memoryAddressSpace = this._Memory.MemoryAddressRegistrar.length.toString(10);
+        var memoryAddressSpace = this._Memory.MemoryAddressRegistrar.length.toString(10);
         this._Memory.log("CREATED - Addressable Space : " + memoryAddressSpace);
 
-        console.log("----DISPLAYING MEMORY, BEGINNING CLOCK PULSE----")
+        console.log("\n----DISPLAYING MEMORY, BEGINNING CLOCK PULSE----")
         this._Memory.displayMemory(0x14);
        
         //commented out so easier to read output for lab 3 without continuous cycle
