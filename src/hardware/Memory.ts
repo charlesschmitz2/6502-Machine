@@ -16,8 +16,10 @@ export class Memory extends Hardware implements ClockListener{
     private system : System;  
     private memoryClockCount: number;
     
-    private MAR =  new Array(0x10000); //16 bit Memory Address Registrar 
-    private MDR = new Array(0x100); //8 bit Memory Data Registrar
+    private MAR: number //16 bit Memory Address Registrar 
+    private MDR: number; //8 bit Memory Data Registrar
+
+    //MAR MDR not array just
 
 
     constructor(system : System) {  
@@ -87,21 +89,22 @@ export class Memory extends Hardware implements ClockListener{
     //reset, pulse ^^, setters/getters for MDR and MAR, read, write - lab 3
 
     /*---------Getters/Setters---------*/
-        get MemoryAddressRegistrar(){
+        public getMemoryAddressRegistrar(){
             return this.MAR;
         }//getMAR
 
-        set MemoryAddressRegistrar(val){
+        public setMemoryAddressRegistrar(val){
             this.MAR = val;
         }//setMAR
 
-        get MemoryDataRegistrar(){
+        public getMemoryDataRegistrar(){
             return this.MDR;
         }//getMDR
 
-        set MemoryDataRegistrar(val){
+        public setMemoryDataRegistrar(val){
             this.MDR = val;
         }//setMDR
+
 
     /*---------Reset Method---------*/
     //Resets MAR,MDR, and Memory by filling all values in it with 0x00
@@ -119,46 +122,25 @@ export class Memory extends Hardware implements ClockListener{
     /*---------Initialize Methods for MAR and MDR---------*/
     //Also called within reset to reinitialize 
         public initializeMAR(): void {
-            var i = 0;
-            while(i<0x10000){
-                this.MAR[i] = 0x00;
-                i++;
-            }//while
+            this.MAR = 0x0000;
             
         }//initializeMAR
 
         public initializeMDR(): void {
-            var i = 0;
-            while(i<0x100){
-                this.MDR[i] = 0x00;
-                i++;
-            }//while
+            this.MDR = 0x00;
             
         }//initializeMemory
 
      /*---------Read and Write Methods---------*/
      //Read will read memory at the location in the MAR and Update the MDR
      //Write will write the contents of MDR to memory at the location indicated by the MAR
+     //Here I used this.***, but could also use the getters and setters from above
         public read(): void{
 
             /*starts at the beginning of the MAR and loops through, taking each value at that index from the MDR and setting it equal to temp then 
             taking that value and assigning to memory at MAR index then increment to next index/MAR address and repeat until get to end of MAR */
-            console.log("\n----READING MEMORY[MAR] INTO MDR----")
-            var index = 0;
-            while(index < this.MAR.length){
-                let temp = 0x00;
-                temp = this.memory[this.MAR[index]];
-                if(temp != 0x00){
-                    this.MDR[this.MAR[index]] = temp;
-                }
-
-                //Testing - Temp represents the data at that particlar address index, Could maybe add additional condition to while so that
-                //if the MAR index is 0 meaning there is nothing there then stop the loop. I did above but not 100% on it
-                //console.log(temp);
-                //console.log(index);
-                
-                index++;
-            }//while 
+            //console.log("\n----READING MEMORY[MAR] INTO MDR----")
+                this.MDR = this.memory[this.MAR];
 
             //Testing       
             //console.log(this.MDR);
@@ -167,38 +149,8 @@ export class Memory extends Hardware implements ClockListener{
         }//read
 
         public write(): void{
-            console.log("\n----WRITING MDR[MAR] INTO MEMORY----")
-            var index = 0;
-            while(index < this.MAR.length){
-                let temp = 0x00;
-                temp = this.MDR[this.MAR[index]];
-                if(temp != 0x00){
-                    this.memory[this.MAR[index]] = temp;
-                }
-
-                index++;
+            //console.log("\n----WRITING MDR[MAR] INTO MEMORY----")
+            this.memory[this.MAR] = this.MDR;
         }//write 
 
 }//Memory Class
-
-
-
-
-
-export class MMU extends Hardware{
-
-    
-    private system: System;
-
-    constructor(system : System){
-        super();
-
-        this.ID=0;
-        this.name="MMU";
-        this.system = system;
-    
-    }//constructor
-
-
-
-}//MMU Class

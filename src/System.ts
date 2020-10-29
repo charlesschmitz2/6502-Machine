@@ -3,7 +3,7 @@ import {Cpu} from "./hardware/Cpu";
 import {Hardware} from "./hardware/Hardware";
 import { Memory } from "./hardware/Memory";
 import {Clock} from "./hardware/Clock";
-import {MMU} from "./hardware/Memory";
+import {MMU} from "./hardware/MMU";
 
 
 /*
@@ -38,11 +38,15 @@ export class System extends Hardware{
         this.name = "SYSTEM";     
         
         this._CPU = new Cpu(this);
-        //Initialize the MMU that is within memory 
-        this._MMU = new MMU(this);
+    
         
-        //Initializes the RAM memory and 
+        //Initializes the RAM memory 
         this._Memory = new Memory(this);
+
+        //Initialize the MMU 
+        this._MMU = new MMU(this, this._Memory);
+
+
         
 
     
@@ -65,14 +69,15 @@ export class System extends Hardware{
         //Lab 3 - When memory is created it should show the total addressable space in the log: NOTE - This could also be done within the memory constructor 
         //but I chose to put it here so that when outputted in the console the first thing that shows up are each HW component being created, then the 
         //total addressable space is displayed, then the memory is displayed...
-        var memoryAddressSpace = this._Memory.MemoryAddressRegistrar.length.toString(10);
-        this._Memory.log("CREATED - Addressable Space : " + memoryAddressSpace);
+        var memoryAddressSpaceAvailable = 65536; 
+        this._Memory.log("CREATED - Addressable Space : " + memoryAddressSpaceAvailable);
 
         console.log("\n----DISPLAYING MEMORY, BEGINNING CLOCK PULSE----")
         this._Memory.displayMemory(0x14);
        
         //commented out so easier to read output for lab 3 without continuous cycle
-        this._Clock = new Clock(CLOCK_INTERVAL, this);
+        //this._Clock = new Clock(CLOCK_INTERVAL, this);
+        console.log("--CLOCK PULSE DISABLED--");
 
         return true;
     }
