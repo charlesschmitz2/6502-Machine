@@ -44,7 +44,8 @@ export class MMU extends Hardware{
         this.writeImmediate(0x000F, 0x00);
 
         this.memoryDump(0x00, 0x0f);
-    
+        
+        //this.readLittleEndian();
     }//constructor 
 
      /*---------Getters/Setters---------*/
@@ -73,7 +74,13 @@ export class MMU extends Hardware{
         this._memory.write();
     }//writes memory 
 
-    public readLittleEndian(){
+    public readLittleEndian(): void{
+        let high = this.getHighOrderByte;
+        let low = this.getLowOrderByte;
+        let littleEndianNum = low + "" + high;
+        
+        this._memory.setMemoryAddressRegistrar(parseInt(littleEndianNum));
+    
         //set low order 
         //set high order 
         //read
@@ -81,12 +88,18 @@ export class MMU extends Hardware{
     }//readLittleEndianForm
 
     //Low and High order bytes should be set to use to format in little endian
-    public setHighOrderByte(num: number){
+    public setHighOrderByte(num: number): void{
         this.highOrderByte = num;
     }//setHighOrderByte
-    public setLowOrderByte(num: number){
+    public setLowOrderByte(num: number): void{
         this.lowOrderByte = num;
     }//setLowOrderByte
+    public getHighOrderByte(): number{
+        return this.highOrderByte;
+    }//getHighOrderByte
+    public getLowOrderByte(): number{
+        return this.lowOrderByte;
+    }//getLowOrderByte
 
     //take address and input data and set the addr in MAR, set the data in MDR, write it to memory 
     public writeImmediate(addr: number, data: number): void{
