@@ -136,9 +136,6 @@ export class Memory extends Hardware implements ClockListener{
      //Write will write the contents of MDR to memory at the location indicated by the MAR
      //Here I used this.***, but could also use the getters and setters from above
         public read(): void{
-
-            /*starts at the beginning of the MAR and loops through, taking each value at that index from the MDR and setting it equal to temp then 
-            taking that value and assigning to memory at MAR index then increment to next index/MAR address and repeat until get to end of MAR */
             //console.log("\n----READING MEMORY[MAR] INTO MDR----")
                 this.MDR = this.memory[this.MAR];
 

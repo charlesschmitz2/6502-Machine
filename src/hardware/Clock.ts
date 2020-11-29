@@ -23,6 +23,7 @@ export class Clock extends Hardware {
         var that = this;
         setInterval(() => that.clockPulse(), clockInterval);
         
+        
         //create array of clocklisteners, iterate through, call pulse 
 
         

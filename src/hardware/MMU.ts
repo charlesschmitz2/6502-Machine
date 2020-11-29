@@ -108,6 +108,14 @@ export class MMU extends Hardware{
         this._memory.write();
     }//writeImmediate 
 
+    //sets the MAR to the given address number and reads memory. returns the MDR value
+    public readImmediate(addr: number): number {
+        this._memory.setMemoryAddressRegistrar(addr);
+        this._memory.read();
+        
+        return(this._memory.getMemoryDataRegistrar());
+    }
+
     /*---------Memory Dump Mehtod---------*/
     //shows the contents of memory starting at the first parameter and ending at the second. 
     public memoryDump(fromAddr: number, toAddr: number){

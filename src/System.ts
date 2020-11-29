@@ -11,7 +11,7 @@ import {MMU} from "./hardware/MMU";
  */
 // Initialization Parameters for Hardware
 // Clock cycle interval
-const CLOCK_INTERVAL= 500;               // This is in ms (milliseconds) so 1000 = 1 second, 100 = 1/10 second
+const CLOCK_INTERVAL= 750;               // This is in ms (milliseconds) so 1000 = 1 second, 100 = 1/10 second
                                         // A setting of 100 is equivalent to 10hz, 1 would be 1,000hz or 1khz,
                                         // .001 would be 1,000,000 or 1mhz. Obviously you will want to keep this
                                         // small, I recommend a setting of 100, if you want to slow things down
@@ -37,7 +37,7 @@ export class System extends Hardware{
         this.ID =0;
         this.name = "SYSTEM";     
         
-        this._CPU = new Cpu(this);
+        this._CPU = new Cpu(this, this._MMU);
     
         
         //Initializes the RAM memory 
@@ -76,8 +76,8 @@ export class System extends Hardware{
         this._Memory.displayMemory(0x14);
        
         //commented out so easier to read output for lab 3 without continuous cycle
-        //this._Clock = new Clock(CLOCK_INTERVAL, this);
-        console.log("--CLOCK PULSE DISABLED--");
+        this._Clock = new Clock(CLOCK_INTERVAL, this);
+        //console.log("--CLOCK PULSE DISABLED--");
 
         return true;
     }
