@@ -11,7 +11,7 @@ export class Clock extends Hardware {
 
     constructor(clockInterval, system : System) { 
 
-        super();
+        super(0, "CLOCK");
         this.system = system;
 
         //pass it the system like with CPU, so can access _CPU and _Memory from systems class and then add to array

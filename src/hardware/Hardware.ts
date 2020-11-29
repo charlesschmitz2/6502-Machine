@@ -9,10 +9,11 @@ export class Hardware {
     public name : String = "HARDWARE";
     public debug : boolean = true;
     
-    
 
-    constructor() {
-        
+    constructor(ID: number, name: String) {
+
+        this.ID =  ID;
+        this.name = name;
 
     }//constructor
 

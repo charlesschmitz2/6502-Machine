@@ -4,6 +4,8 @@ import {Hardware} from "./hardware/Hardware";
 import { Memory } from "./hardware/Memory";
 import {Clock} from "./hardware/Clock";
 import {MMU} from "./hardware/MMU";
+import { InterruptController } from "./hardware/InterruptController";
+import { VirtualKeyboard } from "./hardware/VirtualKeyboard";
 
 
 /*
@@ -26,12 +28,14 @@ export class System extends Hardware{
     public _Memory : Memory = null;
     public _Clock : Clock = null;
     public _MMU : MMU = null;
+    public _IRQController: InterruptController = null;
+    public _Keyboard: VirtualKeyboard;
        
     
     public running: boolean = false;
 
     constructor() {
-    super();
+    super(0,"SYSTEM");
         //console.log("Hello TSIRAM!");
 
         this.ID =0;
@@ -75,6 +79,7 @@ export class System extends Hardware{
         console.log("\n----DISPLAYING MEMORY, BEGINNING CLOCK PULSE----")
         this._Memory.displayMemory(0x14);
        
+        console.log("\n0 = Fetch | 1 = Decode1 | 2 = Decode2 | 3 = Execute | 4 = Execute2 | 5 = Writeback | 6 = InterruptCheck");
         //commented out so easier to read output for lab 3 without continuous cycle
         this._Clock = new Clock(CLOCK_INTERVAL, this);
         //console.log("--CLOCK PULSE DISABLED--");

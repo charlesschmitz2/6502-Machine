@@ -16,7 +16,7 @@ export class MMU extends Hardware{
     private highOrderByte: number;
 
     constructor(system : System, _memory : Memory) {  
-        super();
+        super(0, "MMU");
 
         this.ID=0;
         this.name="MMU";

@@ -23,7 +23,7 @@ export class Memory extends Hardware implements ClockListener{
 
 
     constructor(system : System) {  
-        super();
+        super(0, "MEMORY");
 
         this.ID=0;
         this.name="RAM";
@@ -81,7 +81,7 @@ export class Memory extends Hardware implements ClockListener{
 
         this.memoryClockCount++;
 
-        console.log("[HW - " + this.name + " ID : " + this.ID + " - " + this.dateTime + "] : " + " received clock pulse");
+        //console.log("[HW - " + this.name + " ID : " + this.ID + " - " + this.dateTime + "] : " + " received clock pulse");
         
     }//pulse
 
