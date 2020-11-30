@@ -16,12 +16,12 @@
      import {Hardware} from "./Hardware";
      import {Interrupt} from "./imp/Interrupt";
      import {InterruptController} from "./InterruptController";
-     import {Queue} from "../Queue";
+     import {Queue} from "./util/Queue";
      
      export class VirtualKeyboard extends Hardware implements Interrupt {
      
          constructor(interruptController: InterruptController) {
-             super(0, "VIRTUAL KEYBOARD"); 
+             super(0, "VIRTUAL_KEYBOARD"); 
              
              this.isExecuting = false;
      

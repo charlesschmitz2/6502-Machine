@@ -6,6 +6,9 @@ import {Cpu} from "./Cpu";
 
 
 export class MMU extends Hardware{
+    pcRead(programCounter: number): number {
+        throw new Error("Method not implemented.");
+    }
 
     private system : System;  
     private _memory : Memory;

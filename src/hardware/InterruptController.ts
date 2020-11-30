@@ -1,7 +1,7 @@
 import { System } from "../System";
 import { Hardware } from "./Hardware";
 import { Interrupt } from "./imp/Interrupt";
-import { Queue } from "../Queue";
+import { Queue } from "./util/Queue";
 
 export class  InterruptController extends Hardware implements Interrupt {
     irq: number;
@@ -10,7 +10,7 @@ export class  InterruptController extends Hardware implements Interrupt {
     outputBuffer: Queue<any>;
 
     constructor(identificationNumber: number){
-        super(0, "INTERRUPT CONTROLLER");
+        super(0, "INTERRUPT_CONTROLLER");
     }
 
 }

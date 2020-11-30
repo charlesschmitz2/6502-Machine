@@ -1,4 +1,4 @@
-import { Queue } from "../../Queue";
+import { Queue } from "../util/Queue";
 
 
 export interface Interrupt {
